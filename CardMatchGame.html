@@ -8,7 +8,8 @@ body{
 	background-color:rgba(80,100,200,0.3);
 	font-size:30px;
 }
-ul{list-style:none;
+ul{
+	list-style:none;
 }
 li{
 	display:inline-block;
@@ -37,16 +38,16 @@ img{
 	transform: rotateY(180deg);	
 }
 .front, .back{
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  -webkit-backface-visibility: hidden;
-  -moz-backface-visibility: hidden;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	-webkit-backface-visibility: hidden;
+	-moz-backface-visibility: hidden;
 }
 #Roll{
 	background-color: white;
-  width: 120px;
-  height: 150px;
+	width: 120px;
+	height: 150px;
 }
 .rot{
 	-webkit-animation: FlipAnime 0.4s linear;
@@ -87,15 +88,22 @@ img{
 <button type="button" id="button">Click here!!!!</button>
 <div id="printHere">
 </div>
+
+<div id="printHere">
 </div>
+
+<div id="printHere">
 </div>
+
 <script>
 var counter=0;
 var openCards=[];
 function clickingBackLeaf(x){
-	var a="innerRoll"+x; 
-	var b=document.getElementById(a);
-	b.classList.add("rot");
+	if(counter!=2){
+		var a="innerRoll"+x; 
+		var b=document.getElementById(a);
+		b.classList.add("rot");
+	
 	counter++;
 	var i=0;
 	var e=document.getElementById("printHere");
@@ -126,13 +134,16 @@ function clickingBackLeaf(x){
 					var card=document.getElementById("innerRoll"+ind);
 					card.classList.remove('rot');
 					card.classList.add("AntiRot");
-					card.classList.remove("AntiRot");
+					setTimeout(function NotMatchedCards(){
+							card.classList.remove('AntiRot');
+						},500);
 				}
 			}
 					
 			counter=0;
 			openCards=[];
 		},1000);
+	}
 	}
 }
 function Dice_roll_funct(){
