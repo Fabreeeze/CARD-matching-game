@@ -20,9 +20,34 @@ li{
 }
 img{
 	height:150px;
-	width:110px;
+	width:100px;
 }
 
+.innerRollProperties{
+    position: relative;
+	width: 100%;
+	height: 100%;
+    text-align: center;
+}
+.front{
+	background-color:black;
+	cursor:pointer;	
+}
+.back{
+	transform: rotateY(180deg);	
+}
+.front, .back{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+}
+#Roll{
+	background-color: white;
+  width: 120px;
+  height: 150px;
+}
 </style>
 
 </head>
@@ -34,11 +59,21 @@ img{
 </div>
 </div>
 <script>
+var counter=0;
+var openCards=[];
+function clickingBackLeaf(x){
+	var a="fronti"+x;
+	var b="backi"+x;
+	var c=document.getElementById(a);
+	c.style.display="none";
+	var d=document.getElementById(b);
+	d.style.display="block";
 
+}
 function Dice_roll_funct(){
 	var i=1;
 	var e=document.getElementById("printHere");
-	
+	e.style.display="block";
 	e.innerHTML=" ";
 	var array=[];
 	var fruits=["<img src='apple.png'>","<img src='watermelon.png'>","<img src='orange.jpg'>","<img src='grapes.jpg'>"];
@@ -83,9 +118,10 @@ function Dice_roll_funct(){
 	e.innerHTML+="<ul>";
 	
 	for(i=0;i<16;i++){
-		
-		
-		e.innerHTML+="<li><div>"+finalarray[i]+"</div></li>";
+		var part1="<li><div id='Roll'><div class='innerRollProperties' id='innerRoll"+i+"'>";
+		var part2="<div class='front' id='fronti"+i+"' onclick='clickingBackLeaf("+i+")'><img src='mapleLeaf.jpeg'></div>";
+		var part3="<div class='back' id='backi"+i+"'>"+finalarray[i]+"</div></div></div></li>";
+		e.innerHTML+=part1+part2+part3;
 		if((i+1)%4==0)
 			{e.innerHTML+="<br>";}
 	}
