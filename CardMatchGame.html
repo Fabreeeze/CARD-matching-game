@@ -48,6 +48,37 @@ img{
   width: 120px;
   height: 150px;
 }
+.rot{
+	-webkit-animation: FlipAnime 0.4s linear;
+	-moz-animation: FlipAnime 0.4s linear;
+	animation-fill-mode:forwards;
+	-moz-animation-fill-mode:forwards;
+	transform-style: preserve-3d;
+}
+@-webkit-keyframes FlipAnime{
+	0%{transform:rotateY(0deg);}
+	100%{transform:rotateY(180deg);}
+}
+@-moz-keyframes FlipAnime{
+	0%{transform:rotateY(0deg);}
+	100%{transform:rotateY(180deg);}
+}
+
+.AntiRot{
+	-webkit-animation: antiFlipAnime 0.4s linear;
+	-moz-animation: antiFlipAnime 0.4s linear;
+	animation-fill-mode:forwards;
+	-moz-animation-fill-mode:forwards;
+	transform-style: preserve-3d;
+}
+@-webkit-keyframes antiFlipAnime{
+	0%{transform:rotateY(180deg);}
+	100%{transform:rotateY(0deg);}
+}
+@-moz-keyframes antiFlipAnime{
+	0%{transform:rotateY(180deg);}
+	100%{transform:rotateY(0deg);}
+}
 </style>
 
 </head>
@@ -62,13 +93,47 @@ img{
 var counter=0;
 var openCards=[];
 function clickingBackLeaf(x){
-	var a="fronti"+x;
-	var b="backi"+x;
-	var c=document.getElementById(a);
-	c.style.display="none";
-	var d=document.getElementById(b);
-	d.style.display="block";
-
+	var a="innerRoll"+x; 
+	var b=document.getElementById(a);
+	b.classList.add("rot");
+	counter++;
+	var i=0;
+	var e=document.getElementById("printHere");
+	if(counter==1){
+		openCards[0]=x;	
+	}
+	else if(counter==2){	
+		openCards[1]=x;
+		
+		setTimeout(function TwoCardsClicked(){
+			var el1="backi"+openCards[0];
+			var el2="backi"+openCards[1];
+			var c=document.getElementById(el1);
+			var d=document.getElementById(el2);
+			var c1=c.getElementsByTagName("img");
+			var d1=d.getElementsByTagName("img");
+			
+			if(c1[0].getAttribute("src")==d1[0].getAttribute("src")){	
+				for(var j=0;j<2;j++){
+					var ind=openCards[j];
+					var card=document.getElementById("innerRoll"+ind);
+					card.style.display="none";
+				}					
+			}
+			else{
+				for(var j=0;j<2;j++){
+					var ind=openCards[j];
+					var card=document.getElementById("innerRoll"+ind);
+					card.classList.remove('rot');
+					card.classList.add("AntiRot");
+					card.classList.remove("AntiRot");
+				}
+			}
+					
+			counter=0;
+			openCards=[];
+		},1000);
+	}
 }
 function Dice_roll_funct(){
 	var i=1;
