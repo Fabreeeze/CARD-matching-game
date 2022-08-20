@@ -80,70 +80,93 @@ img{
 	0%{transform:rotateY(180deg);}
 	100%{transform:rotateY(0deg);}
 }
+#scoreDiv,#MovesDiv,#printHere{
+	float:left;
+	
+}
+
 </style>
 
 </head>
 <body>
 
-<button type="button" id="button">Click here!!!!</button>
+<button type="button" id="button">New Game!!!!</button>
 <div id="printHere">
 </div>
 
-<div id="printHere">
+<div id="TimeHere">
 </div>
 
-<div id="printHere">
+<div id="scoreDiv">
+Score
+<p id="ScoreHere"></p>
 </div>
+
+
+<div id="MovesDiv">
+Moves
+<p id="MovesHere"></p>
+</div>
+
 
 <script>
 var counter=0;
 var openCards=[];
+var score=0;
+var moves=0;
 function clickingBackLeaf(x){
 	if(counter!=2){
 		var a="innerRoll"+x; 
 		var b=document.getElementById(a);
 		b.classList.add("rot");
-	
-	counter++;
-	var i=0;
-	var e=document.getElementById("printHere");
-	if(counter==1){
-		openCards[0]=x;	
-	}
-	else if(counter==2){	
-		openCards[1]=x;
-		
-		setTimeout(function TwoCardsClicked(){
-			var el1="backi"+openCards[0];
-			var el2="backi"+openCards[1];
-			var c=document.getElementById(el1);
-			var d=document.getElementById(el2);
-			var c1=c.getElementsByTagName("img");
-			var d1=d.getElementsByTagName("img");
-			
-			if(c1[0].getAttribute("src")==d1[0].getAttribute("src")){	
-				for(var j=0;j<2;j++){
-					var ind=openCards[j];
-					var card=document.getElementById("innerRoll"+ind);
-					card.style.display="none";
-				}					
-			}
-			else{
-				for(var j=0;j<2;j++){
-					var ind=openCards[j];
-					var card=document.getElementById("innerRoll"+ind);
-					card.classList.remove('rot');
-					card.classList.add("AntiRot");
-					setTimeout(function NotMatchedCards(){
-							card.classList.remove('AntiRot');
-						},500);
+		moves++;
+		counter++;
+		var i=0;
+		var e=document.getElementById("printHere");
+		document.getElementById("ScoreHere").innerHTML=score;
+		if(counter==1){
+			openCards[0]=x;	
+		}
+		else if((counter==2)&&(openCards[0]!=x)){	
+			openCards[1]=x;
+			document.getElementById("MovesHere").innerHTML=moves;
+			setTimeout(function TwoCardsClicked(){
+				var el1="backi"+openCards[0];
+				var el2="backi"+openCards[1];
+				var c=document.getElementById(el1);
+				var d=document.getElementById(el2);
+				var c1=c.getElementsByTagName("img");
+				var d1=d.getElementsByTagName("img");
+				
+				if(c1[0].getAttribute("src")==d1[0].getAttribute("src")){
+					score+=2;
+					document.getElementById("ScoreHere").innerHTML=score;
+					for(var j=0;j<2;j++){
+						var ind=openCards[j];
+						var card=document.getElementById("innerRoll"+ind);
+						card.style.display="none";
+					}
+						if(score==16){
+							
+						}
 				}
-			}
-					
-			counter=0;
-			openCards=[];
-		},1000);
-	}
+				else{
+					for(var j=0;j<2;j++){
+						var ind=openCards[j];
+						var card=document.getElementById("innerRoll"+ind);
+						card.classList.remove('rot');
+						
+						setTimeout(function NotMatchedCards(){
+								card.classList.add("AntiRot");
+								card.classList.remove('AntiRot');
+							},500);
+					}
+				}
+						
+				counter=0;
+				openCards=[];
+			},1000);
+		}
 	}
 }
 function Dice_roll_funct(){
