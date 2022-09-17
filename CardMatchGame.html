@@ -5,6 +5,8 @@
 <meta charset="utf-8"/>
 <style>
 body{
+	height:100vh;
+	width:100vw;
 	background-color:rgba(80,100,200,0.3);
 	font-size:30px;
 }
@@ -84,13 +86,29 @@ img{
 	float:left;
 	
 }
-
+#WinDiv{
+	height:1000px;
+	width:1000px;
+	text-align:center;
+	font-size:5vh;
+	color:white;
+	background-color:black;
+	opacity:0.8;
+	display:none;
+	z-index:100;
+	position:absolute;
+}
 </style>
 
 </head>
 <body>
 
 <button type="button" id="button">New Game!!!!</button>
+<div id="WinDiv">
+	<p>Congrats, You won!!!</p>
+	<br><br>
+	<button type="button" id="WinOk">OK!</button>
+</div>
 <div id="printHere">
 </div>
 
@@ -126,6 +144,7 @@ function clickingBackLeaf(x){
 		document.getElementById("ScoreHere").innerHTML=score;
 		if(counter==1){
 			openCards[0]=x;	
+			document.getElementById("MovesHere").innerHTML=moves;
 		}
 		else if((counter==2)&&(openCards[0]!=x)){	
 			openCards[1]=x;
@@ -147,7 +166,7 @@ function clickingBackLeaf(x){
 						card.style.display="none";
 					}
 						if(score==16){
-							
+							document.getElementById("WinDiv").style.display="block";
 						}
 				}
 				else{
@@ -167,10 +186,15 @@ function clickingBackLeaf(x){
 				openCards=[];
 			},1000);
 		}
+		
 	}
 }
 function Dice_roll_funct(){
 	var i=1;
+	score=0;
+	moves=0;
+	document.getElementById("MovesHere").innerHTML=moves;
+	document.getElementById("ScoreHere").innerHTML=score;
 	var e=document.getElementById("printHere");
 	e.style.display="block";
 	e.innerHTML=" ";
@@ -226,7 +250,10 @@ function Dice_roll_funct(){
 	}
 	e.innerHTML+="</ul>";
 }
-
+function OKonWin(){
+	document.getElementById("WinDiv").style.display="none";
+}
+document.getElementById("WinOk").addEventListener("click",OKonWin);
 document.getElementById("button").addEventListener("click",Dice_roll_funct);
 </script>
 </body>
