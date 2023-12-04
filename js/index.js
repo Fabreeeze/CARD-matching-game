@@ -109,7 +109,7 @@ function Dice_roll_funct(){
 		if(k>=4)	k=0;
 	}
 	
-	e.innerHTML+="<ul>";
+	e.innerHTML+='<ul style="list-style-type:none;">';
 	
 	for(i=0;i<16;i++){
 		var part1="<li><div id='Roll'><div class='innerRollProperties' id='innerRoll"+i+"'>";
@@ -121,9 +121,5 @@ function Dice_roll_funct(){
 	}
 	e.innerHTML+="</ul>";
 }
-function OKonWin(){
-	document.getElementById("WinDiv").style.display="none";
-}
 
-document.getElementById("WinOk").addEventListener("click",OKonWin);
 document.getElementById("button").addEventListener("click",Dice_roll_funct);

@@ -1,37 +1,35 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<title>CARD Game</title>
-	<meta charset="utf-8"/>
-
-	<link rel="stylesheet" href="styles/index.css">
+    <meta charset="utf-8"/>
+    <title>CARD Game</title>
+    <link rel="stylesheet" href="styles/index.css">
 </head>
 <body>
 
-<button type="button" id="button">New Game!!!!</button>
-<div id="WinDiv">
-	<p>Congrats, You won!!!</p>
-	<br><br>
-	<button type="button" id="WinOk">OK!</button>
+<div class="container">
+    <button type="button" id="button">New Game!!!!</button>
+
+    <div id="WinDiv" class="overlay">
+        <p>Congrats, You won!!!</p>
+        <button type="button" id="WinOk">OK!</button>
+    </div>
+
+	
+    <div id="scoreDiv" class="game-info">
+        <p>Score: <span id="ScoreHere"></span></p>
+    </div>
+
+    <div id="MovesDiv" class="game-info">
+        <p>Moves: <span id="MovesHere"></span></p>
+    </div>
+
+    <div id="TimeHere" class="game-info"></div>
+
+    <div id="printHere" class="game-board"></div>
+
 </div>
-<div id="printHere">
-</div>
 
-<div id="TimeHere">
-</div>
-
-<div id="scoreDiv">
-Score
-<p id="ScoreHere"></p>
-</div>
-
-
-<div id="MovesDiv">
-Moves
-<p id="MovesHere"></p>
-</div>
-
-
-<script src="js/index.js"></script> 
+<script src="js/index.js"></script>
 </body>
 </html>
